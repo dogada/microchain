@@ -1,7 +1,9 @@
 .next/
 .dist/
 .env
+data/
 node_modules/
+build.json
 npm-debug.log
 *.log
 

@@ -1,0 +1,26 @@
+version: '3'
+services:
+  api:
+    image: microchain_api
+    ports:
+      - "10010:10010"    
+    links:
+      - mongo
+    volumes:
+      - ./api:/home/node/microchain/api
+      - ./shared:/home/node/microchain/api/shared
+      # use node_modules from container
+      - /home/node/microchain/api/node_modules
+    environment:
+      - NODE_ENV=development
+      - DEBUG=microchain:*
+    healthcheck: # check health of production build only
+      disable: true
+  mongo:
+    image: mongo:3.6
+    volumes:
+    - ./data/mongodb:/data/db
+networks:
+  default:
+    external:
+      name: microchain_dev

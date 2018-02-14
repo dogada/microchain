@@ -1,0 +1,8 @@
+version: '3'
+services:
+  shared:
+    build: ./shared
+    image: microchain_shared
+  api:
+    build: ./api
+    image: microchain_api

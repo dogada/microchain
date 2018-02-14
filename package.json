@@ -1,0 +1,24 @@
+{
+  "name": "microchain",
+  "version": "1.0.0",
+  "description": "Microchain demo",
+  "main": "",
+  "scripts": {
+    "test": "npm run dev:api:test",
+    "version": "npm run test",
+    "prebuild": "echo \"{\\\"version\\\": \\\"$(git describe --tags)\\\"}\" > shared/build.json",
+    "build": "time docker-compose -f docker-compose.build.yml build",
+    "create:networks": "docker network create microchain_dev && docker network create microchain_staging && docker network create microchain_prod",
+    "qa": "npm run test && npm run build",
+    "dev:docker": "docker-compose -p microchain",
+    "dev": "npm run dev:docker -- up api",
+    "dev:api:shell": "npm run dev:docker -- exec api /bin/bash",
+    "dev:api:npm": "npm run dev:docker -- run -u root api npm",
+    "dev:api:test": "npm run dev:docker -- run --rm --no-deps api npm run test",
+    "dev:api:test:watch": "npm run dev:docker -- exec api npm run test:watch"
+  },
+  "author": "Dmytro V. Dogadailo, <dvd@dogada.org>",
+  "license": "MIT",
+  "dependencies": {
+  }
+}
