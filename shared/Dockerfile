@@ -11,7 +11,8 @@ WORKDIR /home/node/microchain/shared
 
 RUN npm config set prefix /home/node
 RUN npm completion > ~/.bashrc
-RUN npm i -g jest
+# add some dev only libs to shared image to reduce build time and total images size
+RUN npm i -g jest standard
 ENV PATH "${PATH}:/home/node/bin"
 
 COPY . ./

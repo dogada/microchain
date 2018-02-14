@@ -18,6 +18,11 @@
   },
   "scripts": {
     "start": "node app.js",
+    "lint": "standard",
+    "pretest": "npm run lint",
     "test": "swagger project test"
+  },
+  "standard": {
+    "env": [ "node", "mocha" ]
   }
 }
