@@ -37,9 +37,7 @@ paths:
         "200":
           description: Success
           schema:
-            # a pointer to a definition
             $ref: "#/definitions/Transactions"
-        # responses may fall through to errors
         default:
           description: Error
           schema:
@@ -62,7 +60,38 @@ paths:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
-      
+  /blocks:
+    x-swagger-router-controller: blocks
+    get:
+      description: Returns list of current blocks in the blockchain
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/Blocks"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+    post:
+      description: "Mines a new block and adds it to the blockchain"
+      operationId: mine
+      parameters:
+        - name: body
+          in: body
+          description: An account
+          required: false
+          schema:
+            $ref: "#/definitions/Account"
+      responses:
+        "201":
+          description: Just mined block
+          schema:
+            $ref: "#/definitions/Block"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
   /swagger:
     x-swagger-pipe: swagger_raw
 definitions:
@@ -94,8 +123,8 @@ definitions:
           $ref: "#/definitions/Transaction"
   BlockHash:
     type: string
-    minLength: 32
-    maxLength: 32
+    minLength: 64
+    maxLength: 64
   Block:
     required:
       - index
@@ -117,6 +146,10 @@ definitions:
             type: number
       hash:
         $ref: "#/definitions/BlockHash"
+  Blocks:
+    type: array
+    items:
+      $ref: "#/definitions/Block"
   ErrorResponse:
     required:
       - message
