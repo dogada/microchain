@@ -13,7 +13,7 @@
     "dev:docker": "docker-compose -p microchain",
     "dev": "npm run dev:docker -- up api",
     "dev:api:shell": "npm run dev:docker -- exec api /bin/bash",
-    "dev:api:npm": "npm run dev:docker -- run -u root api npm",
+    "dev:api:root": "npm run dev:docker -- exec -u root api bash",
     "dev:api:test": "npm run dev:docker -- run --rm --no-deps api npm run test",
     "dev:api:test:watch": "npm run dev:docker -- exec api npm run test:watch"
   },
