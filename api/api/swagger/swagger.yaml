@@ -1,11 +1,11 @@
 swagger: "2.0"
 info:
   version: "0.0.1"
-  title: Hello World App
+  title: MicroChain API
 # during dev, should point to your local machine
 host: localhost:10010
 # basePath prefixes all resource paths 
-basePath: /
+basePath: /v1
 # 
 schemes:
   # tip: remove http to make production-grade
@@ -42,17 +42,113 @@ paths:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
+  /transactions:
+    x-swagger-router-controller: transactions
+    get:
+      description: Returns list of transactions for an address
+      parameters:
+        - name: account
+          in: query
+          description: An account
+          required: true
+          type: string
+        - name: count
+          in: query
+          description: Count of last transactions to return
+          required: false
+          type: number
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/Transactions"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+    post:
+      description: "Appends transaction to the buffer"
+      parameters:
+        - name: body
+          in: body
+          description: A transaction
+          required: true
+          schema:
+            $ref: "#/definitions/Transaction"
+      responses:
+        "201":
+          description: Added transaction to the buffer
+          schema:
+            $ref: "#/definitions/Transaction"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+      
   /swagger:
     x-swagger-pipe: swagger_raw
 # complex objects have schema definitions
 definitions:
-  HelloWorldResponse:
+  Account:
+    type: string
+    minLength: 5
+  Amount:
+    type: number
+    minimum: 0
+  Transaction:
+    required:
+      - to
+      - from
+      - amount
+    properties:
+      to:
+        $ref: "#/definitions/Account"
+      from:
+        $ref: "#/definitions/Account"
+      amount:
+        $ref: "#/definitions/Amount"
+  Transactions:
+    required:
+      - items
+    properties:
+      items:
+        type: array
+        items:
+          $ref: "#/definitions/Transaction"
+  BlockHash:
+    type: string
+    minLength: 32
+    maxLength: 32
+  Block:
+    required:
+      - index
+      - timestamp
+      - data
+      - hash
+    properties:
+      index:
+        type: integer
+      timestamp:
+        type: string
+      data:
+        properties:
+          transactions:
+            type: array
+            items:
+              $ref: "#/definitions/Transaction"
+          proof-of-work:
+            type: number
+      hash:
+        $ref: "#/definitions/BlockHash"
+  ErrorResponse:
     required:
       - message
     properties:
       message:
         type: string
-  ErrorResponse:
+  HelloWorldResponse:
     required:
       - message
     properties:
