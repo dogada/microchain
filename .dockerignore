@@ -1,0 +1,12 @@
+.git
+.gitignore
+.dockerignore
+node_modules
+etc/
+webapp/babel-cache.json
+.next
+.dist
+.vscode
+docker-compose*.yml
+*error.log
+
