@@ -1,7 +1,11 @@
 'use strict'
 
+const debug = require('debug')('microchain:app')
 var SwaggerExpress = require('swagger-express-mw')
 var app = require('express')()
+const db = require('./api/helpers/db')
+const {Block} = require('./api/helpers/block')
+
 module.exports = app // for testing
 
 var config = {
@@ -14,13 +18,20 @@ SwaggerExpress.create(config, function (err, swaggerExpress) {
   app.get('/v(:?\\d+)/swagger', enableCORS)
   // install middleware
   swaggerExpress.register(app)
-
-  var port = process.env.PORT || 10010
-  app.listen(port)
-  if (swaggerExpress.runner.swagger.paths['/transactions']) {
+  ensureBlockchain().then(() => {
+    var port = process.env.PORT || 10010
+    app.listen(port)
     console.log(`Listening on port ${port}...`)
-  }
+  })
 })
+
+async function ensureBlockchain () {
+  let total = await db.blocks.count()
+  debug('ensureBlockchain length', total)
+  if (total === 0) {
+    return Block.GENESIS.save()
+  }
+}
 
 // add required CORS headers
 function enableCORS (request, response, next) {

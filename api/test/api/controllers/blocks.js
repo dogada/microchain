@@ -1,5 +1,5 @@
 /* globals describe, it */
-var should = require('should')
+const expect = require('expect')
 var request = require('supertest')
 var server = require('../../../app')
 
@@ -13,8 +13,12 @@ describe('controllers', function () {
           .expect(200)
           .expect('Content-Type', /json/)
           .end(function (err, res) {
-            should.not.exist(err)
-            res.body.should.have.length(1)
+            expect(err).toBe(null)
+            console.log('body', res.body)
+            expect(res.body).toHaveLength(1)
+            let block = res.body[0]
+            expect(block.index).toBe(0)
+            expect(block.data['proof-of-work']).toBe(0)
             done()
           })
       })
