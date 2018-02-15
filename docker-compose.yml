@@ -20,6 +20,16 @@ services:
     image: mongo:3.6
     volumes:
     - ./data/mongodb:/data/db
+  apidocs:
+    image: swaggerapi/swagger-ui
+    ports:
+      - "8080:8080"
+    links:
+      - api
+    environment:
+      - API_URL=http://localhost:10010/v1/swagger/
+
+    
 networks:
   default:
     external:
