@@ -14,7 +14,6 @@ describe('controllers', function () {
           .expect('Content-Type', /json/)
           .end(function (err, res) {
             expect(err).toBe(null)
-            console.log('body', res.body)
             expect(res.body).toHaveLength(1)
             let block = res.body[0]
             expect(block.index).toBe(0)
