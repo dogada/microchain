@@ -1,5 +1,4 @@
 /* globals describe, it */
-const should = require('should')
 const expect = require('expect')
 const {asyncController} = require('../../../api/helpers/async')
 
