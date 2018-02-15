@@ -1,6 +1,9 @@
 'use strict'
 
+const debug = require('debug')('microchain:blocks')
 const crypto = require('crypto')
+const db = require('../helpers/db')
+const {asyncController} = require('../helpers/async')
 
 let blockchain = []
 
@@ -13,11 +16,13 @@ function updateHash (block, prevHash) {
   return block
 }
 
-function get (req, res) {
-  res.json(blockchain)
+async function get (req, res) {
+  let blocks = await db.blocks.find({})
+  debug('Blockchain length', blocks.length)
+  res.json(blocks)
 }
 
-function mine (req, res) {
+async function mine (req, res) {
   let block = updateHash({
     index: blockchain.length,
     timestamp: new Date().toISOString(),
@@ -32,6 +37,6 @@ function mine (req, res) {
 }
 
 module.exports = {
-  get,
-  mine
+  get: asyncController(get),
+  mine: asyncController(mine)
 }

@@ -15,7 +15,7 @@
     "dev:api:shell": "npm run dev:docker -- exec api /bin/bash",
     "dev:api:root": "npm run dev:docker -- exec -u root api bash",
     "dev:api:test": "npm run dev:docker -- run --rm --no-deps api npm run test",
-    "dev:api:test:watch": "npm run dev:docker -- exec api npm run test:watch"
+    "dev:mongo:shell": "npm run dev:docker -- exec mongo /bin/bash"
   },
   "author": "Dmytro V. Dogadailo, <dvd@dogada.org>",
   "license": "MIT",
