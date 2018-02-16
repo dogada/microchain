@@ -8,7 +8,7 @@ const {Block} = require('./api/helpers/block')
 
 module.exports = app // for testing
 app.db = db // for testing
-app.ensureBlockchain = ensureBlockchain
+app.ensureBlockchain = ensureBlockchain // for testing
 
 var config = {
   appRoot: __dirname // required config
