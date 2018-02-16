@@ -23,7 +23,7 @@
     "start": "node app.js",
     "lint": "standard",
     "pretest": "npm run lint",
-    "test": "NODE_ENV=test swagger project test"
+    "test": "NODE_ENV=test DEBUG='' swagger project test"
   },
   "standard": {
     "env": [
