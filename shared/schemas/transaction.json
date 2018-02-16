@@ -1,0 +1,31 @@
+{
+  "id": "transaction",
+  "version": 1,
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Transaction",
+  "description": "A schema for MicroChain transaction",
+  "type": "object",
+  "required": [
+    "to",
+    "from",
+    "amount"
+  ],
+  "properties": {
+    "to": {
+      "type": "string",
+      "title": "To address",
+      "minLength": 5
+    },
+    "from": {
+      "type": "string",
+      "title": "From address",
+      "minLength": 5
+    },
+    "amount": {
+      "type": "number",
+      "title": "Amount to transfer",
+      "minimum": 0,
+      "default": 0
+    }
+  }
+}
