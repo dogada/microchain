@@ -79,10 +79,10 @@ paths:
       parameters:
         - name: body
           in: body
-          description: An account
-          required: false
+          description: A miner config (should be protected by admin credentials)
+          required: true
           schema:
-            $ref: "#/definitions/Account"
+            $ref: "#/definitions/Miner"
       responses:
         "201":
           description: Just mined block
@@ -150,6 +150,12 @@ definitions:
     type: array
     items:
       $ref: "#/definitions/Block"
+  Miner:
+    required:
+      - account
+    properties:
+      account:
+        $ref: "#/definitions/Account"
   ErrorResponse:
     required:
       - message

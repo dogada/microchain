@@ -8,8 +8,18 @@ class BlockData {
     this.proofOfWork = proofOfWork || 0
   }
 
-  addTransaction ({to, from, amount}) {
+  setTransactions (transactions) {
+    this.transactions = transactions
+  }
 
+  // find and update proof-of-work
+  findProofOfWork (previousBlock) {
+    let lastProof = previousBlock.data.proofOfWork
+    let proof = lastProof + 1
+    while (proof % 9 !== 0 && proof % lastProof !== 0) {
+      proof += 1
+    }
+    this.proofOfWork = proof
   }
 
   toJSON () {
@@ -42,12 +52,12 @@ class Block {
     this.hash = hash
   }
 
-  updateHash (previousBlockHash) {
+  updateHash (previousBlock) {
     let hash = crypto.createHash('sha256')
     hash.update(`${this.index}${this.timestamp}`)
     hash.update(this.data.toString())
-    if (previousBlockHash) {
-      hash.update(previousBlockHash)
+    if (previousBlock) {
+      hash.update(previousBlock.hash)
     }
     this.hash = hash.digest('hex')
     return this
