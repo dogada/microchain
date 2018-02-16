@@ -46,8 +46,11 @@ class Block {
     let hash = crypto.createHash('sha256')
     hash.update(`${this.index}${this.timestamp}`)
     hash.update(this.data.toString())
-    hash.update(previousBlockHash)
+    if (previousBlockHash) {
+      hash.update(previousBlockHash)
+    }
     this.hash = hash.digest('hex')
+    return this
   }
 
   toJSON (idField = 'index') {
@@ -76,9 +79,8 @@ class Block {
 }
 
 Block.GENESIS = new Block({
-  index: 0,
-  hash: crypto.createHash('sha256').digest('hex')
-})
+  index: 0
+}).updateHash()
 
 module.exports = {
   Block,
