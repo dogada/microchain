@@ -1,0 +1,9 @@
+{
+  "presets": [
+    "next/babel"
+  ],
+  "plugins": [
+    "root-import",
+    "flow-react-proptypes"
+  ]
+}

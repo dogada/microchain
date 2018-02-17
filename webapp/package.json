@@ -14,9 +14,11 @@
     "test:watch": "jest --watchAll"
   },
   "dependencies": {
+    "babel-plugin-flow-react-proptypes": "^17.1.2",
+    "babel-plugin-root-import": "^5.1.0",
     "debug": "^3.1.0",
     "fast-redux": "^0.7.1",
-    "material-ui": "^1.0.0-beta.31",
+    "material-ui": "^1.0.0-beta.34",
     "material-ui-icons": "^1.0.0-beta.17",
     "material-ui-schema-form": "^0.9.8",
     "next": "^5.0.0",
