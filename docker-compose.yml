@@ -28,9 +28,19 @@ services:
       - api
     environment:
       - API_URL=http://localhost:10010/v1/swagger/
-
-    
-networks:
-  default:
-    external:
-      name: microchain_dev
+  webapp:
+    image: microchain_webapp
+    command: npm run dev
+    ports:
+      - "3000:3000"    
+    volumes:
+      - ./webapp:/home/node/microchain/webapp
+      - ./shared:/home/node/microchain/webapp/shared
+      # use node_modules from container
+      - /home/node/microchain/webapp/node_modules
+    environment:
+      - NODE_ENV=development
+      - DEBUG=microchain:*
+      - API_URL=http://localhost:10010/v1/      
+    healthcheck: # check health of production build only
+      disable: true

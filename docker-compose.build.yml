@@ -6,3 +6,7 @@ services:
   api:
     build: ./api
     image: microchain_api
+  webapp:
+    build: ./webapp
+    image: microchain_webapp
+  

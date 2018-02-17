@@ -11,14 +11,21 @@
     "create:networks": "docker network create microchain_dev && docker network create microchain_staging && docker network create microchain_prod",
     "qa": "npm run test && npm run build",
     "dev:docker": "docker-compose -p microchain",
-    "dev": "npm run dev:docker -- up api",
+    "dev": "npm run dev:docker -- up api webapp",
     "dev:api:shell": "npm run dev:docker -- exec api /bin/bash",
     "dev:api:root": "npm run dev:docker -- exec -u root api bash",
     "dev:api:test": "npm run dev:docker -- run --rm --no-deps api npm run test",
-    "dev:mongo:shell": "npm run dev:docker -- exec mongo /bin/bash"
+    "dev:mongo:shell": "npm run dev:docker -- exec mongo /bin/bash",
+    "dev:webapp:shell": "npm run dev:docker -- exec webapp /bin/bash",
+    "dev:webapp:root": "npm run dev:docker -- exec -u root webapp bash",
+    "dev:webapp:test": "npm run dev:docker -- run --rm --no-deps webapp npm run test"
   },
   "author": "Dmytro V. Dogadailo, <dvd@dogada.org>",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dogada/microchain.git"
+  },  
   "dependencies": {
   }
 }
