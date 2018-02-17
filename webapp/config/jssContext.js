@@ -10,7 +10,7 @@ import red from 'material-ui/colors/red'
 import createGenerateClassName from 'material-ui/styles/createGenerateClassName'
 
 // https://material-ui-next.com/customization/themes/
-export function getTheme (config = {}) {
+export function createTheme (config = {}) {
   return createMuiTheme({
     direction: (config.rtl ? 'rtl' : 'ltr'),
     palette: {
@@ -26,7 +26,7 @@ export function getTheme (config = {}) {
 }
 
 // default theme
-const theme = getTheme()
+const theme = createTheme()
 
 // Configure JSS
 const jss = create(preset())

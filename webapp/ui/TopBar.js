@@ -6,6 +6,7 @@ import IconButton from 'material-ui/IconButton'
 import MenuIcon from 'material-ui-icons/Menu'
 import { withStyles } from 'material-ui/styles'
 import {DRAWER_WIDTH} from '~/shared/constants'
+import TopBarMenu from './TopBarMenu'
 
 const PERMANENT_DRAWER_BREAKPOINT = 'md'
 
@@ -63,6 +64,7 @@ function TopBar (props: TopBarProps) {
         >
           {title || ''}
         </Typography>
+        <TopBarMenu />
       </Toolbar>
     </AppBar>
   )

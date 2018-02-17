@@ -4,7 +4,8 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withStyles, MuiThemeProvider } from 'material-ui/styles'
 import wrapDisplayName from 'recompose/wrapDisplayName'
-import {getContext, getTheme} from '~/config/jssContext'
+import {getContext, createTheme} from './jssContext'
+import {getTheme} from '~/store/theme'
 
 // Apply some reset
 const styles = theme => ({
@@ -48,7 +49,7 @@ function withRoot (BaseComponent) {
 
     componentWillReceiveProps (nextProps) {
       if (nextProps.theme !== this.props.theme) {
-        this.styleContext.theme = getTheme(nextProps.theme)
+        this.styleContext.theme = createTheme(nextProps.theme)
         if (document.body) {
           document.body.dir = this.styleContext.theme.direction
         }
@@ -77,11 +78,7 @@ function withRoot (BaseComponent) {
 }
 
 function mapStateToProps (state) {
-  // FIXME: read theme from store
-  return {theme: {
-    dark: false,
-    rtl: false
-  }}
+  return {theme: getTheme(state)}
 }
 
 function withJss (comp, styles) {
