@@ -1,7 +1,6 @@
 // @flow
 import React from 'react'
 import Layout from '~/ui/BaseLayout'
-import Link from '~/ui/Link'
 import Button from 'material-ui/Button'
 import Toolbar from 'material-ui/Toolbar'
 import {Display1, Headline, Body1} from '~/ui/typography'
@@ -34,13 +33,9 @@ class Error extends React.Component<Props> {
         <Body1>Our admins are notified about this error already.</Body1>
         <Body1>Please choose an action bellow.</Body1>
         <Toolbar disableGutters>
-          <Link href={currentPath}>
-            <Button>Reload current page</Button>
-          </Link>
+          <Button href={currentPath}>Reload current page</Button>
           <Button onClick={() => window.history.back()}>Return to previous page</Button>
-          <Link href='/'>
-            <Button component='a'>Go to homepage</Button>
-          </Link>
+          <Button href='/'>Go to homepage</Button>
         </Toolbar>
       </Layout>
     )
