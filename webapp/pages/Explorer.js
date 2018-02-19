@@ -4,9 +4,10 @@ import config from '~/config'
 import {initPage} from '~/config/page'
 import BaseLayout from '~/ui/BaseLayout'
 import Link from '~/ui/Link'
+import Button from 'material-ui/Button'
 import List, {ListItem, ListItemText} from 'material-ui/List'
 import {Headline, Subheading} from '~/ui/typography'
-import {getBlockchain, syncBlocks} from '~/store/blocks'
+import {getBlockchain, syncBlocks, mineBlock} from '~/store/blocks'
 
 import type {Block} from '~/types'
 
@@ -22,24 +23,38 @@ type Props = {
   syncTime?: string
 }
 
+const styles = theme => ({
+  mineButton: {
+    float: 'right'
+  }
+})
+
 class Explorer extends React.PureComponent<ProvidedProps&Props> {
+  mineBlock = () => this.props.dispatch(mineBlock())
+
   componentDidMount () {
     debug('compDidMount')
     this.props.dispatch(syncBlocks())
   }
 
   render () {
-    let {blocks, syncTime} = this.props
+    let {blocks, syncTime, classes} = this.props
     debug('blocks', blocks)
     return (
       <BaseLayout title='Blockchain Explorer'>
+        <Button
+          className={classes.mineButton} size='large'
+          variant='raised' color='primary'
+          onClick={this.mineBlock}>
+          Mine
+        </Button>
         <Headline>Latest blocks</Headline>
         <Subheading>Last sync time: {syncTime}</Subheading>
         <List>
           {blocks.map(b => (
             <ListItem key={b.index}>
               <Link route='block' params={{index: b.index}}>
-                <ListItemText primary={b.timestamp} secondary={b.hash} />
+                <ListItemText primary={`Block ${b.index} (${b.timestamp})`} secondary={b.hash} />
               </Link>
             </ListItem>
           ))}
@@ -53,4 +68,4 @@ function mapStateToProps (state: Object): Object {
   return getBlockchain(state)
 }
 
-export default initPage(Explorer, {}, mapStateToProps)
+export default initPage(Explorer, styles, mapStateToProps)

@@ -2,7 +2,7 @@
 import config, {ns} from '~/config'
 import {namespaceConfig} from 'fast-redux'
 import type {Block} from '~/types'
-import {loadBlocks} from '~/api/ajax'
+import * as api from '~/api/ajax'
 
 const debug = config.debug('blocks')
 
@@ -45,7 +45,14 @@ export const syncBlocks = () =>
     let {blocks} = getBlockchain(getState())
     let lastIndex = blocks.length ? blocks[0].index : undefined
     debug('lastIndex', lastIndex)
-    return loadBlocks({since: lastIndex})
+    return api.loadBlocks({since: lastIndex})
       .then(data => dispatch(addBlocks(data)))
       .catch(e => console.error(e)) // FIXME: show error in UI
   }
+
+export const mineBlock = () =>
+(dispatch: Function): Promise<void> => {
+  return api.mineBlock()
+    .then(_ => dispatch(syncBlocks()))
+    .catch(e => console.error(e)) // FIXME: show error in UI
+}

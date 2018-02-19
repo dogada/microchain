@@ -24,7 +24,6 @@ type Props = {
 }
 
 class BlockPage extends React.PureComponent<ProvidedProps&Props> {
-
   componentDidMount () {
     this.props.dispatch(syncBlocks())
   }
@@ -45,7 +44,7 @@ class BlockPage extends React.PureComponent<ProvidedProps&Props> {
       return (<Error statusCode={404} message="Block isn't found" />)
     }
     return (
-      <BaseLayout title='Blockchain Explorer'>
+      <BaseLayout title='Block details'>
         {block ? this.renderBlock() : 'Loading...'}
       </BaseLayout>
     )
