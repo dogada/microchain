@@ -19,28 +19,34 @@ type ProvidedProps = {
 }
 
 type Props = {
-  block: Block
+  block?: Block,
+  error?: boolean
 }
 
 class BlockPage extends React.PureComponent<ProvidedProps&Props> {
-  static getInitialProps ({store, req}) {
-    if (!req) {
-      // wait for blockchain if we didn't load it yet
-      return store.dispatch(syncBlocks())
-    }
-  }
 
   componentDidMount () {
     this.props.dispatch(syncBlocks())
   }
 
-  render () {
+  renderBlock () {
     let {block} = this.props
-    if (!block) return (<Error statusCode={404} message="Block isn't found" />)
     return (
-      <BaseLayout title='Blockchain Explorer'>
+      <React.Fragment>
         <Headline>Block {block.index} ({block.timestamp})</Headline>
         <Subheading>{block.hash}</Subheading>
+      </React.Fragment>
+    )
+  }
+
+  render () {
+    let {block, error} = this.props
+    if (error) {
+      return (<Error statusCode={404} message="Block isn't found" />)
+    }
+    return (
+      <BaseLayout title='Blockchain Explorer'>
+        {block ? this.renderBlock() : 'Loading...'}
       </BaseLayout>
     )
   }
@@ -53,12 +59,13 @@ export function findBlock (blocks, index) {
 function mapStateToProps (state: Object, props: Object): Object {
   debug('mapState', props.url.query.index)
   let {blocks} = getBlockchain(state)
-  let index = parseInt(props.url.query.index)
+  let index = parseInt(props.url.query.index, 10)
   debug('blocks', blocks)
   let block = findBlock(blocks, index)
   debug(index, block)
   return {
-    block
+    block,
+    error: blocks.length && !block
   }
 }
 

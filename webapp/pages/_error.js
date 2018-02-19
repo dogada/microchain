@@ -24,7 +24,6 @@ class Error extends React.Component<Props> {
       statusCode,
       message = 'Oops, something went wrong'
     } = this.props
-    console.log('url', this.props.url)
     let currentPath = typeof window !== 'undefined' ? window.location.pathname : null
 
     return (
@@ -40,7 +39,7 @@ class Error extends React.Component<Props> {
           </Link>
           <Button onClick={() => window.history.back()}>Return to previous page</Button>
           <Link href='/'>
-            <Button>Go to homepage</Button>
+            <Button component='a'>Go to homepage</Button>
           </Link>
         </Toolbar>
       </Layout>

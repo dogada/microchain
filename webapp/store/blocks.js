@@ -1,8 +1,10 @@
 // @flow
-import {ns} from '~/config'
+import config, {ns} from '~/config'
 import {namespaceConfig} from 'fast-redux'
 import type {Block} from '~/types'
 import {loadBlocks} from '~/api/ajax'
+
+const debug = config.debug('blocks')
 
 // FIXME: move to top level state.products (reducer/products.js)
 type State = {
@@ -20,13 +22,16 @@ export const {
 } = namespaceConfig(ns('blocks'), DEFAULT_STATE)
 
 const addBlocks = action('appendBlocks',
-  (state: State, data: Array<Block>) => ({
-    blocks: [
-      ...data,
-      ...state
-    ],
-    syncTime: new Date().toISOString()
-  })
+  function (state: State, data: Array<Block>) {
+    debug('addBlocks', data.length)
+    return {
+      blocks: [
+        ...data,
+        ...state
+      ],
+      syncTime: new Date().toISOString()
+    }
+  }
 )
 
 /**
@@ -39,9 +44,8 @@ export const syncBlocks = () =>
   (dispatch: Function, getState: Function): Promise<void> => {
     let {blocks} = getBlockchain(getState())
     let lastIndex = blocks.length ? blocks[0].index : undefined
-    let loadPromise = loadBlocks({since: lastIndex})
+    debug('lastIndex', lastIndex)
+    return loadBlocks({since: lastIndex})
       .then(data => dispatch(addBlocks(data)))
-    // if we already have some blocks, show them immediately and
-    // later repaint if need
-    return lastIndex >= 0 ? Promise.resolve() : loadPromise
+      .catch(e => console.error(e)) // FIXME: show error in UI
   }
