@@ -7,5 +7,5 @@ build.json
 npm-debug.log
 *.log
 .vscode
-
+jsconfig.json
 
