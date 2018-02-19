@@ -12,12 +12,12 @@ export function pageTitle (title: ?string) {
 Return page component wrapped with Redux and Jss.
 */
 export function initPage (
-    comp: any,
-    styles?: Object = {},
-    mapStateToProps?: (state: Object, ownProps: Object) => Object,
-    mapDispatchToProps?: (dispatch: Function, ownProps?: ?Object) => Object,
-    mergeProps?: (stateProps: Object, dispatchProps: Object, ownProps: Object) => Object,
-    reduxOptions?: Object) {
+  comp: any,
+  styles?: Object = {},
+  mapStateToProps?: (state: Object, ownProps: Object) => Object,
+  mapDispatchToProps?: (dispatch: Function, ownProps?: ?Object) => Object,
+  mergeProps?: (stateProps: Object, dispatchProps: Object, ownProps: Object) => Object,
+  reduxOptions?: Object) {
   return reduxPage(withJss(comp, styles), mapStateToProps, mapDispatchToProps, mergeProps)
 }
 

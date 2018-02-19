@@ -4,8 +4,6 @@ import config from '~/config'
 import {initPage} from '~/config/page'
 import BaseLayout from '~/ui/BaseLayout'
 import Error from './_error'
-import Link from '~/ui/Link'
-import List, {ListItem, ListItemText} from 'material-ui/List'
 import {Headline, Subheading} from '~/ui/typography'
 import {getBlockchain, syncBlocks} from '~/store/blocks'
 

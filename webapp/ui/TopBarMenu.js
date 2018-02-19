@@ -73,12 +73,13 @@ class TopMenu extends React.Component<ProvidedProps & Props, State> {
           onClose={this.closeMenu}
         >
           <MenuItem>
-            <FormControlLabel control={
-              <Switch
-                checked={theme.dark}
-                onChange={this.onDarkThemeSwitch}
-              />
-            }
+            <FormControlLabel
+              control={
+                <Switch
+                  checked={theme.dark}
+                  onChange={this.onDarkThemeSwitch}
+                />
+              }
               label='Dark theme' />
           </MenuItem>
         </Menu>

@@ -51,8 +51,8 @@ export const syncBlocks = () =>
   }
 
 export const mineBlock = () =>
-(dispatch: Function): Promise<void> => {
-  return api.mineBlock()
-    .then(_ => dispatch(syncBlocks()))
-    .catch(e => console.error(e)) // FIXME: show error in UI
-}
+  (dispatch: Function): Promise<void> => {
+    return api.mineBlock()
+      .then(_ => dispatch(syncBlocks()))
+      .catch(e => console.error(e)) // FIXME: show error in UI
+  }
