@@ -3,8 +3,12 @@ import * as React from 'react'
 import config from '~/config'
 import {initPage} from '~/config/page'
 import BaseLayout from '~/ui/BaseLayout'
-// import Link from 'next/link'
-import {Subheading} from '~/ui/typography'
+import Link from 'next/link'
+import List, {ListItem, ListItemText} from 'material-ui/List'
+import {Headline, Subheading} from '~/ui/typography'
+import {getBlockchain, syncBlocks} from '~/store/blocks'
+
+import type {Block} from '~/types'
 
 const debug = config.debug('Homepage')
 
@@ -15,21 +19,39 @@ type ProvidedProps = {
   dispatch: Function
 }
 
-type State = {
+type Props = {
+  blocks: Array<Block>,
+  syncTime?: string
 }
 
-class Homepage extends React.PureComponent<ProvidedProps, State> {
+class Homepage extends React.PureComponent<ProvidedProps&Props> {
   componentDidMount () {
     debug('compDidMount')
+    this.props.dispatch(syncBlocks())
   }
 
   render () {
+    let {blocks, syncTime} = this.props
     return (
-      <BaseLayout title='MicroChain'>
-        <Subheading>MicroChain demo</Subheading>
+      <BaseLayout title='Blockchain Explorer'>
+        <Headline>Latest blocks</Headline>
+        <Subheading>Last sync time: {syncTime}</Subheading>
+        <List>
+          {blocks.map(b => (
+            <ListItem key={b.id}>
+              <Link href={'/blocks/' + b.id}>
+                <ListItemText primary={b.timestamp} secondary={b.hash} />
+              </Link>
+            </ListItem>
+          ))}
+        </List>
       </BaseLayout>
     )
   }
 }
 
-export default initPage(Homepage)
+function mapStateToProps (state: Object): Object {
+  return getBlockchain(state)
+}
+
+export default initPage(Homepage, {}, mapStateToProps)

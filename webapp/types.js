@@ -17,3 +17,19 @@ export type JSONSchema = {
   description: string,
   type: string
 }
+
+export type Transaction = {
+  from: string,
+  to: string,
+  amount: number
+}
+
+export type Block = {
+  index: number,
+  hash: string,
+  timestamp: string,
+  data?: {
+    'proof-of-work': number,
+    transactions: Array<Transaction>
+  }
+}
