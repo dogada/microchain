@@ -27,7 +27,7 @@ const addBlocks = action('appendBlocks',
     return {
       blocks: [
         ...data,
-        ...state
+        ...state.blocks
       ],
       syncTime: new Date().toISOString()
     }
