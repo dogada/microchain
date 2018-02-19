@@ -44,7 +44,7 @@ class Explorer extends React.PureComponent<ProvidedProps&Props> {
       <BaseLayout title='Blockchain Explorer'>
         <Button
           className={classes.mineButton} size='large'
-          variant='raised' color='primary'
+          variant='raised' color='secondary'
           onClick={this.mineBlock}>
           Mine
         </Button>
