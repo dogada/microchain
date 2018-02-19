@@ -10,7 +10,14 @@ const NETWORK_ACCOUNT = 'network'
 const MINER_BONUS = 1
 
 async function get (req, res) {
-  let blocks = await db.blocks.find({})
+  let since = req.swagger.params.since.value
+  let count = req.swagger.params.count.value
+  let blocks = await db.blocks.find({
+    _id: {$gt: since}
+  }, {
+    sort: {_id: -1},
+    limit: count
+  })
   debug('get blockchain length', blocks.length)
   blocks = blocks.map(Block.fromJSON)
   res.json(blocks.map(b => b.toJSON()))

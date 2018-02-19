@@ -64,6 +64,19 @@ paths:
     x-swagger-router-controller: blocks
     get:
       description: Returns list of current blocks in the blockchain
+      parameters:
+        - name: since
+          in: query
+          description: Max index of block that clinet already loaded  
+          required: false
+          type: integer
+          default: -1
+        - name: count
+          in: query
+          description: Count of last blocks to return
+          required: false
+          type: number
+          default: 10
       responses:
         "200":
           description: Success

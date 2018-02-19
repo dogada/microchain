@@ -22,8 +22,12 @@ SwaggerExpress.create(config, function (err, swaggerExpress) {
   swaggerExpress.register(app)
   ensureBlockchain().then(() => {
     var port = process.env.PORT || 10010
-    app.listen(port)
-    console.log(`Listening on port ${port}...`)
+    if (process.env.NODE_ENV !== 'test') {
+      app.listen(port)
+      console.log(`Listening on port ${port}...`)
+    } else {
+      console.log(`No listening to avoid conflicts with supertest!!!`)
+    }
   })
 })
 

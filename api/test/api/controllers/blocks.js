@@ -3,6 +3,7 @@ const expect = require('expect')
 var request = require('supertest')
 var server = require('../../../app')
 
+// TODO: load test blockchain from a fixture
 describe('controllers', function () {
   beforeEach(async done => {
     // reset database state before each test
@@ -25,6 +26,20 @@ describe('controllers', function () {
             let block = res.body[0]
             expect(block.index).toBe(0)
             expect(block.data['proof-of-work']).toBe(0)
+            done()
+          })
+      })
+
+      it('should take into account ?count parameter', function (done) {
+        request(server)
+          .get('/v1/blocks')
+          .query({since: 0})
+          .set('Accept', 'application/json')
+          .expect(200)
+          .expect('Content-Type', /json/)
+          .end(function (err, res) {
+            expect(err).toBe(null)
+            expect(res.body).toHaveLength(0)
             done()
           })
       })
