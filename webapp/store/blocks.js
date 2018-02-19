@@ -35,10 +35,13 @@ const addBlocks = action('appendBlocks',
 // TODO: improve performance
 // for performance reasons we can not load full blocks with transaction here;
 // we can load block transaction later when user will request them
-export const syncBlocks = (id: string, req: any) =>
+export const syncBlocks = () =>
   (dispatch: Function, getState: Function): Promise<void> => {
     let {blocks} = getBlockchain(getState())
     let lastIndex = blocks.length ? blocks[0].index : undefined
-    return loadBlocks({since: lastIndex})
+    let loadPromise = loadBlocks({since: lastIndex})
       .then(data => dispatch(addBlocks(data)))
+    // if we already have some blocks, show them immediately and
+    // later repaint if need
+    return lastIndex >= 0 ? Promise.resolve() : loadPromise
   }

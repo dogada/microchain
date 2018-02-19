@@ -6,7 +6,7 @@ import Drawer from 'material-ui/Drawer'
 import Typography from 'material-ui/Typography'
 import Divider from 'material-ui/Divider'
 import Hidden from 'material-ui/Hidden'
-import Link from 'next/link'
+import Link from '~/ui/Link'
 import List, {ListItem, ListItemText} from 'material-ui/List'
 import ErrorBoundary from '~/ui/ErrorBoundary'
 
@@ -67,9 +67,9 @@ type AppDrawerProps = {
   onClose: Function,
 }
 
-const renderListLink = ({text, href, prefetch}) => (
+const renderListLink = ({text, href, route, prefetch}) => (
   <ListItem button key={text}>
-    <Link href={href} prefetch={prefetch}>
+    <Link route={route} href={href} prefetch={prefetch}>
       <ListItemText primary={text} />
     </Link>
   </ListItem>
@@ -84,7 +84,8 @@ function AppDrawer (props: AppDrawerProps, context) {
       {renderDrawerHeader(props)}
       <div className={classes.content}>
         <List>
-          {renderListLink({text: 'About', href: '/about/', prefetch: true})}
+          {renderListLink({text: 'Blockchain explorer', route: 'homepage', prefetch: true})}
+          {renderListLink({text: 'About', route: 'about'})}
         </List>
       </div>
     </ErrorBoundary>

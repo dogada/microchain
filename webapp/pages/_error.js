@@ -1,18 +1,18 @@
 // @flow
-
 import React from 'react'
 import Layout from '~/ui/BaseLayout'
-import Link from 'next/link'
-import {Display1, Headline, Body1} from '~/ui/typography'
+import Link from '~/ui/Link'
 import Button from 'material-ui/Button'
 import Toolbar from 'material-ui/Toolbar'
+import {Display1, Headline, Body1} from '~/ui/typography'
+import {initPage} from '~/config/page'
 
 type Props = {
   statusCode?: number,
-  message: string
+  message?: string
 }
 
-export default class Error extends React.Component<Props> {
+class Error extends React.Component<Props> {
   // called for system errors
   static getInitialProps ({ res, err }) {
     const statusCode = res ? res.statusCode : err ? err.statusCode : null
@@ -24,6 +24,7 @@ export default class Error extends React.Component<Props> {
       statusCode,
       message = 'Oops, something went wrong'
     } = this.props
+    console.log('url', this.props.url)
     let currentPath = typeof window !== 'undefined' ? window.location.pathname : null
 
     return (
@@ -46,3 +47,5 @@ export default class Error extends React.Component<Props> {
     )
   }
 }
+
+export default initPage(Error)
