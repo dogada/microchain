@@ -1,7 +1,8 @@
 import Typography from 'material-ui/Typography'
 
 function typo (type, props) {
-  return (<Typography variant={type}>{props.children}</Typography>)
+  let {children, ...rest} = props
+  return (<Typography variant={type} {...rest}>{children}</Typography>)
 }
 
 export const Display1 = typo.bind(null, 'display1')
