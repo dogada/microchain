@@ -25,3 +25,9 @@ export function makeTransfer (transaction: Transaction): Promise<void> {
     body: transaction
   })
 }
+
+export function loadAccountTransactions (account: string): Promise<void> {
+  return fetchJson(`transactions/`, {
+    query: {account}
+  })
+}

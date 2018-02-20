@@ -5,3 +5,4 @@ routes
   .add('homepage', '/', 'Explorer')
   .add('block', '/block/:index', 'Block')
   .add('transfer', '/transfer/', 'Transfer')
+  .add('account', '/account/:address', 'Account')
