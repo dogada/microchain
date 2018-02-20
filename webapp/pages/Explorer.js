@@ -15,7 +15,8 @@ const debug = config.debug('Explorer')
 
 type ProvidedProps = {
   url: Object,
-  dispatch: Function
+  dispatch: Function,
+  classes: Object
 }
 
 type Props = {
@@ -52,9 +53,11 @@ class Explorer extends React.PureComponent<ProvidedProps&Props> {
         <Subheading>Last sync time: {syncTime}</Subheading>
         <List>
           {blocks.map(b => (
-            <ListItem key={b.index}>
+            <ListItem button key={b.index}>
               <Link route='block' params={{index: b.index}}>
-                <ListItemText primary={`Block ${b.index} (${b.timestamp})`} secondary={b.hash} />
+                <ListItemText
+                  primary={`Block ${b.index} (${b.timestamp})`}
+                  secondary={`${b.data.transactions.length} transactions`} />
               </Link>
             </ListItem>
           ))}

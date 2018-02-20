@@ -4,7 +4,7 @@ import config from '~/config'
 import {initPage} from '~/config/page'
 import BaseLayout from '~/ui/BaseLayout'
 import Error from './_error'
-import {Headline, Subheading} from '~/ui/typography'
+import {Headline, Subheading, Body1} from '~/ui/typography'
 import {getBlockchain, syncBlocks} from '~/store/blocks'
 
 import type {Block} from '~/types'
@@ -31,7 +31,9 @@ class BlockPage extends React.PureComponent<ProvidedProps&Props> {
     return (
       <React.Fragment>
         <Headline>Block {block.index} ({block.timestamp})</Headline>
-        <Subheading>{block.hash}</Subheading>
+        <Subheading>{block.data.transactions.length} transactions</Subheading>
+        <Body1>Hash: {block.hash}</Body1>
+        <Body1>Proof: {block.data['proof-of-work']}</Body1>
       </React.Fragment>
     )
   }

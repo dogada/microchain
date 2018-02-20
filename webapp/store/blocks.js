@@ -6,7 +6,6 @@ import * as api from '~/api/ajax'
 
 const debug = config.debug('blocks')
 
-// FIXME: move to top level state.products (reducer/products.js)
 type State = {
   blocks: Array<Block>,
   syncTime?: string
@@ -21,7 +20,7 @@ export const {
   getState: getBlockchain
 } = namespaceConfig(ns('blocks'), DEFAULT_STATE)
 
-export const addBlocks = action('appendBlocks',
+export const addBlocks = action('addBlocks',
   function (state: State, data: Array<Block>) {
     debug('addBlocks', data.length)
     return {
