@@ -18,6 +18,7 @@ class About extends React.PureComponent<Props> {
       <Layout title='About us'>
         <Headline>Microchain</Headline>
         <Body1>Website version: {build.version}</Body1>
+        <Body1><a href='https://github.com/dogada/microchain'>Source code</a></Body1>
       </Layout>
     )
   }
