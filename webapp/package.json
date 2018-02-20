@@ -12,7 +12,7 @@
     "start": "NODE_ENV=production node server.js",
     "lint": "standard",
     "pretest": "npm run lint",
-    "test": "jest",
+    "test": "NODE_ENV=test DEBUG='' jest",
     "test:watch": "jest --watchAll"
   },
   "dependencies": {
@@ -40,9 +40,14 @@
   },
   "devDependencies": {
     "babel-eslint": "^8.2.1",
+    "babel-jest": "^22.2.2",
     "babel-plugin-flow-react-proptypes": "^17.1.2",
     "babel-plugin-root-import": "^5.1.0",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
     "eslint-plugin-flowtype": "^2.45.0",
+    "react-addons-test-utils": "^15.6.2",
+    "react-test-renderer": "^16.2.0",
     "standard": "^11.0.0"
   }
 }

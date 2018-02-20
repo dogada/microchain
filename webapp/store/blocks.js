@@ -21,7 +21,7 @@ export const {
   getState: getBlockchain
 } = namespaceConfig(ns('blocks'), DEFAULT_STATE)
 
-const addBlocks = action('appendBlocks',
+export const addBlocks = action('appendBlocks',
   function (state: State, data: Array<Block>) {
     debug('addBlocks', data.length)
     return {

@@ -4,7 +4,7 @@
   "description": "Microchain demo",
   "main": "",
   "scripts": {
-    "test": "npm run dev:api:test",
+    "test": "npm run dev:api:test && npm run dev:webapp:test",
     "version": "npm run test",
     "prebuild": "echo \"{\\\"version\\\": \\\"$(git describe --tags)\\\"}\" > shared/build.json",
     "build": "time docker-compose -f docker-compose.build.yml build",
