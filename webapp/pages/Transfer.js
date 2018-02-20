@@ -7,7 +7,7 @@ import {initPage} from '~/config/page'
 import BaseLayout from '~/ui/BaseLayout'
 import {Router} from '~/routes'
 import {Headline} from '~/ui/typography'
-import {makeTransfer} from '~/store/transactions'
+import {makeTransfer} from '~/store/accounts'
 import TransactionSchema from '~/shared/schemas/transaction'
 import type {Transaction} from '~/types'
 

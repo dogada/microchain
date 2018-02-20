@@ -19,7 +19,13 @@ function parseResponse (res) {
   })
 }
 
-export default function fetchApi (url: string, opts?: Object) {
+function queryParams (params) {
+  return Object.keys(params)
+      .map(k => encodeURIComponent(k) + '=' + encodeURIComponent(params[k]))
+      .join('&')
+}
+
+export default function fetchJson (url: string, opts?: Object) {
   if (typeof window === 'undefined') {
     console.error('No window on server')
     return Promise.reject(new Error('No window'))
@@ -35,8 +41,8 @@ export default function fetchApi (url: string, opts?: Object) {
   if (typeof opts.body === 'object') {
     opts.body = JSON.stringify(opts.body)
   }
-
+  let qs = opts.query ? `?${queryParams(opts.query)}` : ''
   return window
-    .fetch(`${API_ROOT}${url}`, opts)
+    .fetch(`${API_ROOT}${url}${qs}`, opts)
     .then(parseResponse)
 }

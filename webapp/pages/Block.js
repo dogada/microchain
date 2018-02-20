@@ -5,6 +5,7 @@ import {initPage} from '~/config/page'
 import BaseLayout from '~/ui/BaseLayout'
 import Error from './_error'
 import {Headline, Subheading, Body1} from '~/ui/typography'
+import TransactionList from '~/ui/TransactionList'
 import {getBlockchain, syncBlocks} from '~/store/blocks'
 
 import type {Block} from '~/types'
@@ -17,7 +18,7 @@ type ProvidedProps = {
 }
 
 type Props = {
-  block?: Block,
+  block: Block,
   error?: boolean
 }
 
@@ -34,6 +35,7 @@ class BlockPage extends React.PureComponent<ProvidedProps&Props> {
         <Subheading>{block.data.transactions.length} transactions</Subheading>
         <Body1>Hash: {block.hash}</Body1>
         <Body1>Proof: {block.data['proof-of-work']}</Body1>
+        <TransactionList data={block.data.transactions} />
       </React.Fragment>
     )
   }
@@ -51,7 +53,7 @@ class BlockPage extends React.PureComponent<ProvidedProps&Props> {
   }
 }
 
-export function findBlock (blocks, index) {
+export function findBlock (blocks: Array<Block>, index: number) {
   return blocks.filter(b => b.index === index)[0]
 }
 
