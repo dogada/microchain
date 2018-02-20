@@ -1,0 +1,25 @@
+[ignore]
+<PROJECT_ROOT>/.next
+<PROJECT_ROOT>/dist
+<PROJECT_ROOT>/flow-typed
+<PROJECT_ROOT>/types
+.*/node_modules/.*
+
+[include]
+webapp/
+
+[libs]
+flow-typed
+types
+
+[options]
+esproposal.class_static_fields=enable
+esproposal.class_instance_fields=enable
+module.file_ext=.js
+module.file_ext=.md
+module.system.node.resolve_dirname=node_modules
+module.system.node.resolve_dirname=.
+module.name_mapper='^~/shared/\(.*\)$' -> '<PROJECT_ROOT>/shared/\1'
+module.name_mapper='^~/\(.*\)$' -> '<PROJECT_ROOT>/webapp/\1'
+suppress_comment= \\(.\\|\n\\)*\\$FlowIgnore
+suppress_comment= \\(.\\|\n\\)*\\$FlowFixMe
