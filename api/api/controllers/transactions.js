@@ -5,11 +5,13 @@ const {asyncController} = require('../helpers/async')
 const buffer = require('../helpers/buffer')
 const db = require('../helpers/db')
 
+const DEFAULT_TRANSACTIONS_COUNT = 100
 /**
- * Return list of transactions with enclosing blocks references.
+ * Return last transactions for given address.
  */
 async function get (req, res) {
   let account = req.swagger.params.account.value
+  let count = req.swagger.params.count.value || DEFAULT_TRANSACTIONS_COUNT
   let items = await db.blocks.aggregate([
     {
       $unwind: {
@@ -24,6 +26,14 @@ async function get (req, res) {
           {'data.transactions.to': account}
         ]
       }
+    },
+    {
+      $sort: {
+        _id: -1
+      }
+    },
+    {
+      $limit: count
     },
     {
       $project: {
