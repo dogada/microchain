@@ -73,7 +73,6 @@ describe('controllers', function () {
             done()
           })
       })
-
     })
   })
 })
