@@ -37,7 +37,7 @@ paths:
         "200":
           description: Success
           schema:
-            $ref: "#/definitions/Transactions"
+            $ref: "#/definitions/BlockTransactions"
         default:
           description: Error
           schema:
@@ -126,14 +126,42 @@ definitions:
         $ref: "#/definitions/Account"
       amount:
         $ref: "#/definitions/Amount"
-  Transactions:
+  BlockTransaction:
+    required:
+      - to
+      - from
+      - amount
+      - block
+      - position
+    properties:
+      to:
+        $ref: "#/definitions/Account"
+      from:
+        $ref: "#/definitions/Account"
+      amount:
+        $ref: "#/definitions/Amount"
+      block:
+        required:
+          - index
+          - timestamp
+          - hash
+        properties:
+          index:
+            type: integer
+          timestamp:
+            type: string  
+          hash:
+            type: string
+      position:
+        type: number
+  BlockTransactions:
     required:
       - items
     properties:
       items:
         type: array
         items:
-          $ref: "#/definitions/Transaction"
+          $ref: "#/definitions/BlockTransaction"  
   BlockHash:
     type: string
     minLength: 64

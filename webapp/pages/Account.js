@@ -55,7 +55,7 @@ class AccountPage extends React.PureComponent<ProvidedProps&Props> {
 
 function mapStateToProps (state: Object, props: Object): Object {
   let address = props.url.query.address
-  debug('address', address)
+  debug('mapState address', address)
   let account = getAccountsFromState(state)[address] || {}
   return {
     address,
