@@ -13,12 +13,13 @@ function errorHandler (res) {
  */
 function asyncController (handler) {
   return (req, res) => {
-    handler(req, res)
+    return handler(req, res)
       .then() // if there is no error handler already sent data
       .catch(errorHandler(res))
   }
 }
 
 module.exports = {
-  asyncController
+  asyncController,
+  errorHandler
 }
