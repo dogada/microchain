@@ -5,6 +5,7 @@
   "main": "",
   "scripts": {
     "test": "npm run dev:api:test && npm run dev:webapp:test",
+    "test:coverage": "npm run dev:webapp:test:coverage",
     "version": "npm run test",
     "prebuild": "echo \"{\\\"version\\\": \\\"$(git describe --tags)\\\"}\" > shared/build.json",
     "build": "time docker-compose -f docker-compose.build.yml build",
@@ -18,7 +19,8 @@
     "dev:mongo:shell": "npm run dev:docker -- exec mongo /bin/bash",
     "dev:webapp:shell": "npm run dev:docker -- exec webapp /bin/bash",
     "dev:webapp:root": "npm run dev:docker -- exec -u root webapp bash",
-    "dev:webapp:test": "npm run dev:docker -- run --rm --no-deps webapp npm run test"
+    "dev:webapp:test": "npm run dev:docker -- run --rm --no-deps webapp npm run test",
+    "dev:webapp:test:coverage": "npm run dev:docker -- run --rm --no-deps webapp npm run test:coverage"
   },
   "author": "Dmytro V. Dogadailo, <dvd@dogada.org>",
   "license": "MIT",
