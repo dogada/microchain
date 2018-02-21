@@ -84,7 +84,7 @@ function AppDrawer (props: AppDrawerProps, context) {
       {renderDrawerHeader(props)}
       <div className={classes.content}>
         <List>
-          {renderListLink({text: 'Blockchain explorer', route: 'homepage', prefetch: true})}
+          {renderListLink({text: 'Blockchain explorer', route: 'homepage'})}
           {renderListLink({text: 'Make a transfer', route: 'transfer', prefetch: true})}
           {renderListLink({text: 'About', route: 'about'})}
         </List>
