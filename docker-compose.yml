@@ -1,7 +1,7 @@
 version: '3'
 services:
   api:
-    image: microchain_api
+    image: dogada/microchain_api
     ports:
       - "10010:10010"    
     links:
@@ -29,7 +29,7 @@ services:
     environment:
       - API_URL=http://localhost:10010/v1/swagger/
   webapp:
-    image: microchain_webapp
+    image: dogada/microchain_webapp
     command: npm run dev
     ports:
       - "3000:3000"    

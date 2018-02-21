@@ -2,11 +2,11 @@ version: '3'
 services:
   shared:
     build: ./shared
-    image: microchain_shared
+    image: dogada/microchain_shared
   api:
     build: ./api
-    image: microchain_api
+    image: dogada/microchain_api
   webapp:
     build: ./webapp
-    image: microchain_webapp
+    image: dogada/microchain_webapp
   
