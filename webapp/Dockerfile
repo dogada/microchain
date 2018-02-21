@@ -1,4 +1,4 @@
-FROM microchain_shared:latest
+FROM dogada/microchain_shared:latest
 
 WORKDIR /home/node/microchain/webapp
 COPY package.json package-lock.json ./

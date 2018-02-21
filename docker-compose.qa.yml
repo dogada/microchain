@@ -1,0 +1,31 @@
+version: '3'
+services:
+  api:
+    image: dogada/microchain_api
+    ports:
+      - "10011:10010"    
+    links:
+      - mongo
+    environment:
+      - NODE_ENV=production
+      - DEBUG=microchain:*
+  mongo:
+    image: mongo:3.6
+    volumes:
+    - /data/microchain/qa/mongodb:/data/db
+  apidocs:
+    image: swaggerapi/swagger-ui
+    ports:
+      - "8081:8080"
+    links:
+      - api
+    environment:
+      - API_URL=http://localhost:10011/v1/swagger/
+  webapp:
+    image: dogada/microchain_webapp
+    command: npm run start
+    ports:
+      - "3001:3000"    
+    environment:
+      - NODE_ENV=production
+      - DEBUG=microchain:*

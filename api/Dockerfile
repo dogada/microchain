@@ -1,4 +1,4 @@
-FROM microchain_shared:latest
+FROM dogada/microchain_shared:latest
 
 WORKDIR /home/node/microchain/api
 
@@ -19,4 +19,4 @@ EXPOSE 10010
 
 # check health
 HEALTHCHECK --interval=1m --timeout=3s \
-  CMD curl -f http://localhost:10010/?healthcheck || exit 1
+  CMD curl -f http://localhost:10010/v1/swagger/?healthcheck || exit 1
