@@ -9,7 +9,7 @@
     "version": "npm run test",
     "prebuild": "echo \"{\\\"version\\\": \\\"$(git describe --tags)\\\"}\" > shared/build.json",
     "build": "time docker-compose -f docker-compose.build.yml build",
-    "postbuild": "npm run docker:tag",
+    "postbuild": "npm run docker:tag && npm run qa:stop && npm run qa:start",
     "docker:tag:shared": "docker tag dogada/microchain_shared dogada/microchain_shared:$npm_package_version",
     "docker:tag:api": "docker tag dogada/microchain_api dogada/microchain_api:$npm_package_version",
     "docker:tag:webapp": "docker tag dogada/microchain_webapp dogada/microchain_webapp:$npm_package_version",
