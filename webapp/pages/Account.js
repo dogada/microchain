@@ -26,7 +26,6 @@ const styles = theme => ({
 })
 
 class AccountPage extends React.PureComponent<ProvidedProps&Props> {
-
   static defaultProps = {
     transactions: []
   }

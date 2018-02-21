@@ -21,8 +21,8 @@ function parseResponse (res) {
 
 function queryParams (params) {
   return Object.keys(params)
-      .map(k => encodeURIComponent(k) + '=' + encodeURIComponent(params[k]))
-      .join('&')
+    .map(k => encodeURIComponent(k) + '=' + encodeURIComponent(params[k]))
+    .join('&')
 }
 
 export default function fetchJson (url: string, opts?: Object) {

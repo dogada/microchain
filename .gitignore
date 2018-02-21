@@ -3,6 +3,7 @@
 .env
 data/
 node_modules/
+coverage/
 build.json
 npm-debug.log
 *.log

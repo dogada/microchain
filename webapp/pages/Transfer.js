@@ -1,5 +1,4 @@
 // @flow
-import config from '~/config'
 import * as React from 'react'
 import Button from 'material-ui/Button'
 import { SchemaForm, utils } from 'material-ui-schema-form'
@@ -10,8 +9,6 @@ import {Headline} from '~/ui/typography'
 import {makeTransfer} from '~/store/accounts'
 import TransactionSchema from '~/shared/schemas/transaction'
 import type {Transaction} from '~/types'
-
-const debug = config.debug('TransferPage')
 
 type ProvidedProps = {
   dispatch: Function,
