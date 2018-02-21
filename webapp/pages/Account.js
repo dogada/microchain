@@ -5,7 +5,7 @@ import {initPage} from '~/config/page'
 import BaseLayout from '~/ui/BaseLayout'
 import {Headline, Subheading} from '~/ui/typography'
 import {getAccountsFromState, loadAccountTransactions} from '~/store/accounts'
-import TransactionList from '~/ui/TransactionList'
+import BlockTransactionList from '~/ui/BlockTransactionList'
 import type {Transaction} from '~/types'
 
 const debug = config.debug('AccountPage')
@@ -47,7 +47,7 @@ class AccountPage extends React.PureComponent<ProvidedProps&Props> {
       <BaseLayout title='Account details'>
         <Headline>{address}</Headline>
         <Subheading>Last sync time: {syncTime}</Subheading>
-        <TransactionList data={transactions} />
+        <BlockTransactionList data={transactions} />
       </BaseLayout>
     )
   }

@@ -33,3 +33,15 @@ export type Block = {
     transactions: Array<Transaction>
   }
 }
+
+export type BlockTransaction = {
+  block: {
+    index: number,
+    timestamp: string,
+    hash: string
+  },
+  position: number,
+  from: string,
+  to: string,
+  amount: number
+}

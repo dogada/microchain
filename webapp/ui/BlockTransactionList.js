@@ -4,7 +4,8 @@ import {withStyles} from 'material-ui/styles'
 import Paper from 'material-ui/Paper'
 import Table, {TableBody, TableHead, TableCell, TableRow} from 'material-ui/Table'
 import AddressLink from '~/ui/AddressLink'
-import type {Transaction} from '~/types'
+import BlockLink from '~/ui/BlockLink'
+import type {BlockTransaction} from '~/types'
 
 const styles = (theme: Object) => ({
   root: {
@@ -12,22 +13,24 @@ const styles = (theme: Object) => ({
     marginTop: 2 * theme.spacing.unit
   },
   table: {
-    minWidth: 250
+    minWidth: 300
   }
 })
 
 type Props = {
-  data: Array<Transaction>,
+  data: Array<BlockTransaction>,
   classes: Object
 }
 
-function TransactionList ({ data, classes }: Props) {
+function BlockTransactionList ({ data, classes }: Props) {
   // index is bad key, but the list is immutable, so it's ok
   return (
     <Paper className={classes.root}>
       <Table className={classes.table}>
         <TableHead>
           <TableRow>
+            <TableCell>Block</TableCell>
+            <TableCell>Timestamp</TableCell>
             <TableCell>From</TableCell>
             <TableCell>To</TableCell>
             <TableCell>Amount</TableCell>
@@ -35,7 +38,13 @@ function TransactionList ({ data, classes }: Props) {
         </TableHead>
         <TableBody>
           {data.map((transaction, i) => (
-            <TableRow key={i}>
+            <TableRow key={transaction.block.index * 10 ** 6 + transaction.position}>
+              <TableCell numeric>
+                <BlockLink index={transaction.block.index} />
+              </TableCell>
+              <TableCell>
+                {transaction.block.timestamp}
+              </TableCell>
               <TableCell>
                 <AddressLink address={transaction.from} />
               </TableCell>
@@ -53,4 +62,4 @@ function TransactionList ({ data, classes }: Props) {
   )
 }
 
-export default withStyles(styles)(TransactionList)
+export default withStyles(styles)(BlockTransactionList)
