@@ -9,6 +9,7 @@ const {Block} = require('./api/helpers/block')
 module.exports = app // for testing
 app.db = db // for testing
 app.ensureBlockchain = ensureBlockchain // for testing
+app.set('trust proxy', 1) // https://expressjs.com/en/guide/behind-proxies.html
 
 var config = {
   appRoot: __dirname // required config
@@ -26,7 +27,7 @@ SwaggerExpress.create(config, function (err, swaggerExpress) {
       app.listen(port)
       console.log(`Listening on port ${port}...`)
     } else {
-      console.log(`No listening to avoid conflicts with supertest!!!`)
+      console.warn(`No listening to avoid conflicts with supertest!!!`)
     }
   })
 })
