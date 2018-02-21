@@ -15,6 +15,7 @@
     "swagger-express-mw": "^0.1.0"
   },
   "devDependencies": {
+    "nyc": "^11.4.1",
     "should": "^7.1.0",
     "supertest": "^1.0.0",
     "swagger": "^0.7.5"
@@ -23,7 +24,8 @@
     "start": "node app.js",
     "lint": "standard",
     "pretest": "npm run lint",
-    "test": "NODE_ENV=test DEBUG='' swagger project test"
+    "test": "NODE_ENV=test DEBUG='' swagger project test",
+    "test:coverage": "NODE_ENV=test DEBUG='' nyc --cache=false swagger project test"
   },
   "standard": {
     "env": [

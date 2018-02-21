@@ -4,6 +4,7 @@
 data/
 node_modules/
 coverage/
+.nyc_output/
 build.json
 npm-debug.log
 *.log
