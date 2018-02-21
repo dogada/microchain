@@ -6,7 +6,7 @@ import {MINER_ACCOUNT} from '~/shared/constants'
 
 // TODO: implement ?since GET param to sync blockchain
 export function loadBlocks (query: Object): Promise<Array<Block>> {
-  let since = `${query.since || -1}`
+  let since = `${query.since >= 0 ? query.since : -1}`
   return fetchJson(`blocks/?since=${encodeURIComponent(since)}`)
 }
 
