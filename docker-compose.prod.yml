@@ -1,0 +1,45 @@
+version: '3'
+services:
+  api:
+    image: dogada/microchain_api
+    links:
+      - mongo
+    networks:
+      - webproxy
+      - default
+    environment:
+      - NODE_ENV=production
+      - DEBUG=microchain:*
+      - VIRTUAL_HOST=api.micro.dogada.org,api.mic.dogada.org
+      - LETSENCRYPT_HOST=api.micro.dogada.org,api.mic.dogada.org
+      - LETSENCRYPT_EMAIL=info@dogada.org
+  mongo:
+    image: mongo:3.6
+    volumes:
+    - /data/microchain/prod/mongodb:/data/db
+  apidocs:
+    image: swaggerapi/swagger-ui
+    networks:
+      - webproxy
+      - default
+    environment:
+      - API_URL=https://api.mic.dogada.org/v1/swagger/
+      - VIRTUAL_HOST=apidocs.micro.dogada.org
+      - LETSENCRYPT_HOST=apidocs.micro.dogada.org
+      - LETSENCRYPT_EMAIL=info@dogada.org
+  webapp:
+    image: dogada/microchain_webapp
+    command: npm run start
+    environment:
+      - NODE_ENV=production
+      - DEBUG=microchain:*
+      - VIRTUAL_HOST=micro.dogada.org
+      - LETSENCRYPT_HOST=micro.dogada.org
+      - LETSENCRYPT_EMAIL=info@dogada.org
+    networks:
+      - webproxy
+      - default
+networks:
+  webproxy:
+    external:
+      name: webproxy      

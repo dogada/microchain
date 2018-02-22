@@ -39,7 +39,8 @@
     "qa:restart": "npm run qa:docker -- restart",
     "qa:mongo:shell": "npm run qa:docker -- exec mongo mongo",
     "qa:logs": "npm run qa:docker -- logs -f",
-    "qa:shell": "npm run qa:docker -- exec webapp /bin/bash"
+    "qa:shell": "npm run qa:docker -- exec webapp /bin/bash",
+    "docker-prod": "docker-compose -p microchainprod -f docker-compose.prod.yml"
   },
   "author": "Dmytro V. Dogadailo, <dvd@dogada.org>",
   "license": "MIT",
