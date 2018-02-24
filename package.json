@@ -16,7 +16,6 @@
     "docker:tag": "npm run docker:tag:shared && npm run docker:tag:api && npm run docker:tag:webapp",
     "docker:push": "docker-compose -f docker-compose.build.yml push",
     "release": "git push && git push --tags && npm run docker:push",
-    "create:networks": "docker network create microchain_staging && docker network create microchain_prod",
     "dev:docker": "docker-compose -p microchain",
     "dev": "npm run dev:docker -- up api webapp",
     "start": "npm run qa:up",
